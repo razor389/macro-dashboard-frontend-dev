@@ -216,13 +216,13 @@ const MacroDashboard = () => {
                   </p>
                 </div>
                 <div className="p-4 bg-gray-50 rounded">
-                  <p className="text-gray-600">Δ Inflation (=Market Implied - Expected)</p>
+                  <p className="text-gray-600">Δ Inflation (=Market Implied - Estimated)</p>
                   <p className="text-xl font-bold text-blue-600">
                     {deltaInflation !== null ? `${deltaInflation}%` : 'N/A'}
                   </p>
                 </div>
                 <div className="p-4 bg-gray-50 rounded">
-                  <p className="text-gray-600">Δ Growth (=Market Implied - Expected)</p>
+                  <p className="text-gray-600">Δ Growth (=Market Implied - Estimated)</p>
                   <p className="text-xl font-bold text-blue-600">
                     {deltaGrowth !== null ? `${deltaGrowth}%` : 'N/A'}
                   </p>
@@ -234,20 +234,13 @@ const MacroDashboard = () => {
           {/* Right Column - Equity Metrics */}
           <div className="flex flex-col space-y-4">
             <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-semibold mb-4">Historical Metrics</h2>
+              <h2 className="text-xl font-semibold mb-4">Historical Metrics (From 1926-Present)</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-4 bg-gray-50 rounded">
                   <p className="text-gray-600">Past Inflation</p>
                   <p className="text-xl font-bold text-blue-600">
                     {data.equityMetrics?.past_inflation_cagr ? 
                       `${(data.equityMetrics.past_inflation_cagr * 100).toFixed(2)}%` : 'N/A'}
-                  </p>
-                </div>
-                <div className="p-4 bg-gray-50 rounded">
-                  <p className="text-gray-600">Past Dividend Yield</p>
-                  <p className="text-xl font-bold text-blue-600">
-                    {data.equityMetrics?.avg_dividend_yield ? 
-                      `${(data.equityMetrics.avg_dividend_yield * 100).toFixed(2)}%` : 'N/A'}
                   </p>
                 </div>
                 <div className="p-4 bg-gray-50 rounded">
@@ -269,6 +262,13 @@ const MacroDashboard = () => {
                   <p className="text-xl font-bold text-blue-600">
                     {data.equityMetrics?.past_returns_cagr ? 
                       `${(data.equityMetrics.past_returns_cagr * 100).toFixed(2)}%` : 'N/A'}
+                  </p>
+                </div>
+                <div className="p-4 bg-gray-50 rounded">
+                  <p className="text-gray-600">Past Dividend Yield</p>
+                  <p className="text-xl font-bold text-blue-600">
+                    {data.equityMetrics?.avg_dividend_yield ? 
+                      `${(data.equityMetrics.avg_dividend_yield * 100).toFixed(2)}%` : 'N/A'}
                   </p>
                 </div>
                 <div className="p-4 bg-gray-50 rounded">
@@ -335,23 +335,23 @@ const MacroDashboard = () => {
                 <div className="grid grid-cols-2 gap-3 flex-grow">
                   {[
                     { label: 'Current P/E', value: metrics?.currentPE?.toFixed(2) },
-                    { label: 'Expected CAPE', value: metrics?.expectedCape?.toFixed(2) },
+                    { label: 'Estimated CAPE', value: metrics?.expectedCape?.toFixed(2) },
                     { 
                       label: 'Current Dividend Yield', 
                       value: data.equity?.current_sp500_price && data.equity?.ttm_dividend ? 
                         ((data.equity.ttm_dividend.value / data.equity.current_sp500_price) * 100).toFixed(2) : null,
                       suffix: '%'
                     },
-                    { label: 'Expected Dividend Yield', value: metrics?.expectedDivYield?.toFixed(2), suffix: '%' },
+                    { label: 'Estimated Dividend Yield', value: metrics?.expectedDivYield?.toFixed(2), suffix: '%' },
                     { 
                       label: 'Past 10 Year ROE',
                       value: data.equityMetrics?.current_returns_cagr && data.equityMetrics?.current_cape_cagr ? 
                         ((data.equityMetrics.current_returns_cagr - data.equityMetrics.current_cape_cagr) * 100).toFixed(2) : null,
                       suffix: '%'
                     },
-                    { label: 'Expected ROE', value: metrics?.expectedROE?.toFixed(2), suffix: '%' },
-                    { label: 'Expected CAPE Change', value: metrics?.expectedCapeChange?.toFixed(2), suffix: '%' },
-                    { label: 'Expected Earnings Growth', value: metrics?.expectedEarningsGrowth?.toFixed(2), suffix: '%' }
+                    { label: 'Estimated ROE', value: metrics?.expectedROE?.toFixed(2), suffix: '%' },
+                    { label: 'Estimated CAPE Change', value: metrics?.expectedCapeChange?.toFixed(2), suffix: '%' },
+                    { label: 'Estimated Earnings Growth', value: metrics?.expectedEarningsGrowth?.toFixed(2), suffix: '%' }
                   ].map(({ label, value, suffix = '' }, index) => (
                     <div key={index} className="p-3 bg-gray-50 rounded flex justify-between items-center">
                       <span className="text-sm text-gray-600">{label}</span>
@@ -378,7 +378,10 @@ const MacroDashboard = () => {
               </div>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-              <h2 className="text-xl font-semibold mb-3">Expected Market Return</h2>
+              <h2 className="text-xl font-semibold mb-3">
+                <div>Estimated Market Return</div>
+                <div className="text-sm">(=Estimated Div Yield + Estimated CAPE Change + Estimated Earnings Growth)</div>
+              </h2>
               <div className="text-3xl font-bold text-blue-600">
                 {metrics?.expectedMarketReturn ? `${metrics.expectedMarketReturn.toFixed(2)}%` : 'N/A'}
               </div>
@@ -386,7 +389,7 @@ const MacroDashboard = () => {
           </div>
           
           <div className="bg-white p-8 rounded-lg shadow-lg mx-auto max-w-2xl">
-            <h2 className="text-2xl font-bold text-center mb-4">Expected Equity Risk Premium</h2>
+            <h2 className="text-2xl font-bold text-center mb-4">Estimated Equity Risk Premium</h2>
             <div className="flex justify-center">
               <div className="text-4xl font-bold text-blue-600">
                 {expectedEquityRiskPremium ? `${expectedEquityRiskPremium}%` : 'N/A'}
