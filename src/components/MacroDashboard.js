@@ -129,9 +129,9 @@ const MacroDashboard = () => {
       <div className="p-6 max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Macroeconomic Dashboard</h1>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {/* Left Column - Bonds & Rates */}
-          <div className="space-y-4">
+          <div className="flex flex-col space-y-4">
             <div className="bg-white p-4 rounded-lg shadow">
               <h2 className="text-xl font-semibold mb-4">Current Market Data</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -232,7 +232,7 @@ const MacroDashboard = () => {
           </div>
   
           {/* Right Column - Equity Metrics */}
-          <div className="space-y-4">
+          <div className="flex flex-col space-y-4">
             <div className="bg-white p-6 rounded-lg shadow">
               <h2 className="text-xl font-semibold mb-4">Historical Metrics</h2>
               <div className="grid grid-cols-2 gap-4">
