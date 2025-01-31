@@ -282,31 +282,31 @@ const MacroDashboard = () => {
             </div>
   
             <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-semibold mb-4">Current Metrics</h2>
+              <h2 className="text-xl font-semibold mb-4">Past 10 Year Metrics</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-4 bg-gray-50 rounded">
-                  <p className="text-gray-600">Current Inflation</p>
+                  <p className="text-gray-600">Past 10 Year Inflation</p>
                   <p className="text-xl font-bold text-blue-600">
                     {data.equityMetrics?.current_inflation_cagr ? 
                       `${(data.equityMetrics.current_inflation_cagr * 100).toFixed(2)}%` : 'N/A'}
                   </p>
                 </div>
                 <div className="p-4 bg-gray-50 rounded">
-                  <p className="text-gray-600">Current Earnings Growth</p>
+                  <p className="text-gray-600">Past 10 Year Earnings Growth</p>
                   <p className="text-xl font-bold text-blue-600">
                     {data.equityMetrics?.current_earnings_cagr ? 
                       `${(data.equityMetrics.current_earnings_cagr * 100).toFixed(2)}%` : 'N/A'}
                   </p>
                 </div>
                 <div className="p-4 bg-gray-50 rounded">
-                  <p className="text-gray-600">Current CAPE Change</p>
+                  <p className="text-gray-600">Past 10 Year CAPE Change</p>
                   <p className="text-xl font-bold text-blue-600">
                     {data.equityMetrics?.current_cape_cagr ? 
                       `${(data.equityMetrics.current_cape_cagr * 100).toFixed(2)}%` : 'N/A'}
                   </p>
                 </div>
                 <div className="p-4 bg-gray-50 rounded">
-                  <p className="text-gray-600">Current Market Returns</p>
+                  <p className="text-gray-600">Past 10 Year Market Returns</p>
                   <p className="text-xl font-bold text-blue-600">
                     {data.equityMetrics?.current_returns_cagr ? 
                       `${(data.equityMetrics.current_returns_cagr * 100).toFixed(2)}%` : 'N/A'}
@@ -344,7 +344,7 @@ const MacroDashboard = () => {
                     },
                     { label: 'Expected Dividend Yield', value: metrics?.expectedDivYield?.toFixed(2), suffix: '%' },
                     { 
-                      label: 'Current ROE',
+                      label: 'Past 10 Year ROE',
                       value: data.equityMetrics?.current_returns_cagr && data.equityMetrics?.current_cape_cagr ? 
                         ((data.equityMetrics.current_returns_cagr - data.equityMetrics.current_cape_cagr) * 100).toFixed(2) : null,
                       suffix: '%'
